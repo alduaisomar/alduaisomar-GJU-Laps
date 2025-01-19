@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shortcut Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #ff7e5f, #feb47b);
+      color: #fff;
+      padding: 20px;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      text-shadow: 2px 2px #444;
+      margin-bottom: 20px;
+    }
+
+    #container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #config {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 20px;
+    }
+
+    #config label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+    }
+
+    #config input {
+      width: 60px;
+      padding: 5px;
+      text-align: center;
+      border: 2px solid #fff;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.8);
+      color: #000;
+    }
+
+    #buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 15px;
+      max-width: 600px;
+    }
+
+    button {
+      padding: 15px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      background-color: #ffd700;
+    }
+
+    button[data-group="B"] {
+      background-color: #4caf50;
+      color: #fff;
+    }
+
+    button[data-group="C"] {
+      background-color: #2196f3;
+      color: #fff;
+    }
+
+    button[data-group="D"] {
+      background-color: #ff5722;
+      color: #fff;
+    }
+
+    button[data-group="H"] {
+      background-color: #9c27b0;
+      color: #fff;
+    }
+
+    button[data-group="L"] {
+      background-color: #ffc107;
+      color: #fff;
+    }
+
+    button[data-group="M"] {
+      background-color: #3f51b5;
+      color: #fff;
+    }
+
+    button:disabled {
+      background-color: #a9a9a9;
+      color: #666;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    p {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 30px;
+      text-shadow: 1px 1px #444;
+    }
+
+    #total {
+      font-size: 28px;
+      color: #ffd700;
+      text-shadow: 2px 2px #000;
+    }
+  </style>
+</head>
+<body>
+  <h1>GJU Labs</h1>
+
+  <div id="container">
+    <div id="config">
+      <label>B002 <input type="number" id="B002" value="26"></label>
+      <label>B105 <input type="number" id="B105" value="15"></label>
+      <label>B301 <input type="number" id="B301" value="25"></label>
+      <label>B302 <input type="number" id="B302" value="15"></label>
+      <label>B303 <input type="number" id="B303" value="15"></label>
+      <label>C106 <input type="number" id="C106" value="18"></label>
+      <label>C126 <input type="number" id="C126" value="15"></label>
+      <label>C131 <input type="number" id="C131" value="10"></label>
+      <label>C402 <input type="number" id="C402" value="15"></label>
+      <label>C403 <input type="number" id="C403" value="15"></label>
+      <label>C407 <input type="number" id="C407" value="15"></label>
+      <label>C408 <input type="number" id="C408" value="23"></label>
+      <label>D016 <input type="number" id="D016" value="60"></label>
+      <label>H501 <input type="number" id="H501" value="25"></label>
+      <label>H515 <input type="number" id="H515" value="15"></label>
+      <label>H516 <input type="number" id="H516" value="20"></label>
+      <label>L208 <input type="number" id="L208" value="25"></label>
+      <label>M121 <input type="number" id="M121" value="15"></label>
+      <label>M327 <input type="number" id="M327" value="20"></label>
+    </div>
+
+    <div id="buttons">
+      <button data-group="B" onclick="addNumber(this, 'B002')">B002</button>
+      <button data-group="B" onclick="addNumber(this, 'B105')">B105</button>
+      <button data-group="B" onclick="addNumber(this, 'B301')">B301</button>
+      <button data-group="B" onclick="addNumber(this, 'B302')">B302</button>
+      <button data-group="B" onclick="addNumber(this, 'B303')">B303</button>
+      <button data-group="C" onclick="addNumber(this, 'C106')">C106</button>
+      <button data-group="C" onclick="addNumber(this, 'C126')">C126</button>
+      <button data-group="C" onclick="addNumber(this, 'C131')">C131</button>
+      <button data-group="C" onclick="addNumber(this, 'C402')">C402</button>
+      <button data-group="C" onclick="addNumber(this, 'C403')">C403</button>
+      <button data-group="C" onclick="addNumber(this, 'C407')">C407</button>
+      <button data-group="C" onclick="addNumber(this, 'C408')">C408</button>
+      <button data-group="D" onclick="addNumber(this, 'D016')">D016</button>
+      <button data-group="H" onclick="addNumber(this, 'H501')">H501</button>
+      <button data-group="H" onclick="addNumber(this, 'H515')">H515</button>
+      <button data-group="H" onclick="addNumber(this, 'H516')">H516</button>
+      <button data-group="L" onclick="addNumber(this, 'L208')">L208</button>
+      <button data-group="M" onclick="addNumber(this, 'M121')">M121</button>
+      <button data-group="M" onclick="addNumber(this, 'M327')">M327</button>
+    </div>
+  </div>
+
+  <p>Total: <span id="total">0</span></p>
+
+  <script>
+    let total = 0;
+
+    function addNumber(button, id) {
+      const input = document.getElementById(id);
+      const number = parseInt(input.value, 10);
+      total += number;
+      document.getElementById("total").textContent = total;
+      button.disabled = true;
+    }
+  </script>
+</body>
+</html>
